@@ -144,4 +144,11 @@ contract GasliteSplitterTest is Test {
         vm.expectRevert(GasliteSplitter.BalanceZero.selector);
         splitter.release(address(token));
     }
+
+    function test_splitterRecipientsReturnsAddresses() public {
+        address[] memory recipients = splitter.recipients();
+        for (uint256 i = 0; i < SIZE; i++) {
+            assertEq(recipients[i], vm.addr(i + 1));
+        }
+    }
 }
